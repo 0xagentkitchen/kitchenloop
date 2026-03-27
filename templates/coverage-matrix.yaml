@@ -1,0 +1,19 @@
+# Coverage Matrix — {{PROJECT_NAME}}
+#
+# Tracks which spec surface combinations have been tested.
+# Updated by the ideate phase (records new combos tested) and
+# reported on by the regress phase (coverage stats).
+#
+# The matrix is derived from kitchenloop.yaml spec.dimensions.
+# Each entry records a tested combination with its iteration and result.
+
+last_updated: null
+total_combos: 0
+tested_combos: 0
+coverage_pct: 0.0
+
+tested: []
+#  - combo: { feature: "auth", action: "login" }
+#    iteration: 5
+#    result: "pass"
+#    tier: "T1"

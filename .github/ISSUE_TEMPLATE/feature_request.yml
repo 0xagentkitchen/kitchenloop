@@ -1,0 +1,50 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please describe the problem and your proposed solution.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: "What problem does this solve? What's the pain point?"
+      placeholder: "I'm frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: "How would you like this to work?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: "What other approaches did you consider?"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: "Which part of KitchenLoop does this affect?"
+      options:
+        - Orchestrator (kitchenloop.sh)
+        - Prompts (ideate, execute, etc.)
+        - Discussion Manager (discuss.py)
+        - PR Manager
+        - Configuration
+        - Init / Setup
+        - Documentation
+        - Other
+    validations:
+      required: false

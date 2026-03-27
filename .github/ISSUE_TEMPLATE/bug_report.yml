@@ -1,0 +1,80 @@
+name: Bug Report
+description: Report a bug in KitchenLoop
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill out the sections below.
+
+  - type: input
+    id: version
+    attributes:
+      label: KitchenLoop version
+      description: "Output of `git log --oneline -1` in the KitchenLoop repo"
+      placeholder: "e.g. abc1234 Add UAT gate"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Linux (x86_64)
+        - Linux (ARM)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: "Relevant tool versions"
+      placeholder: |
+        bash --version: 5.2.37
+        claude --version: 1.0.0
+        jq --version: 1.7
+        yq --version: 4.40.5
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: "Minimal steps to trigger the bug"
+      placeholder: |
+        1. Run `./scripts/kitchenloop/kitchenloop.sh 1`
+        2. Wait for execute phase
+        3. Observe error in log
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: "What should have happened"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: "What actually happened"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: "Paste relevant log output (from `.kitchenloop/logs/`)"
+      render: shell
+    validations:
+      required: false

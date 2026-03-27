@@ -1,0 +1,196 @@
+# ─── KitchenLoop Configuration ───────────────────────────────────────────
+# The Loop that Cooks! — Autonomous improvement loop for any codebase.
+# Copy this file to kitchenloop.yaml and customize for your project.
+
+# ─── Project ─────────────────────────────────────────────────────
+project:
+  name: "my-project"
+  description: "One-line description for LLM context"
+  language: "python"                       # python | typescript | go | rust | etc.
+
+# ─── Repository ──────────────────────────────────────────────────
+repo:
+  base_branch: "main"                     # Branch the loop merges artifacts into
+  pr_target: "main"                       # PR target branch (often same as base_branch)
+  iteration_branch_prefix: "kitchen/iter" # Iteration branch naming
+  env_file: ".env"                        # Sourced at startup, copied to worktrees
+
+# ─── Paths (repo contract) ──────────────────────────────────────
+# Every artifact location is declared here. The orchestrator never
+# hardcodes paths — it reads them from this section.
+paths:
+  reports: "docs/internal/reports"         # Experience reports, loop reviews
+  loop_state: "docs/internal/loop-state.md"
+  patterns: "memory/codebase-patterns.md"
+  logs: ".kitchenloop/logs"
+  scenarios: "scenarios/incubating"        # Where ideate writes its output
+  worktree_prefix: ".claude/worktrees"
+  execute_worktree: ".claude/worktrees/kitchenloop"
+  uat_runs: ".kitchenloop/uat-runs"        # UAT evaluation evidence
+  unbeatable_tests: ".kitchenloop/unbeatable-tests.md"  # Project-specific L3/L4 test guidance
+  uat_cards: ".kitchenloop/uat-cards"      # Sealed UAT test cards
+  metrics: ".kitchenloop/metrics.json"     # Iteration metrics for drift tracking
+  coverage_matrix: ".kitchenloop/coverage-matrix.yaml"  # Spec surface coverage
+  blocked_combos: ".kitchenloop/blocked-combos.yaml"    # Known-broken combos (YAML)
+
+# ─── Spec Surface ───────────────────────────────────────────────
+# What the loop exercises. Dimensions are combined to generate scenarios.
+spec:
+  docs:                                    # Spec docs the LLM reads during ideation
+    - "README.md"
+    # - "docs/api-reference.md"
+  dimensions:                              # Coverage axes for scenario generation
+    features: ["auth", "payments", "reports"]
+    # platforms: ["web", "mobile-api"]
+    # user_types: ["admin", "user", "guest"]
+  blocked: []                              # Known-broken combos to skip
+
+# ─── UI Tests ────────────────────────────────────────────────────────────────
+# Configure browser-driven test flows for --mode ui.
+# Requires agent-browser to be installed (npm install -g agent-browser).
+ui_tests:
+  base_url: http://localhost:3000          # Where your app runs locally
+  screenshot_dir: .kitchenloop/ui-test-screenshots
+  screenshot_retention: 5                  # Keep screenshots from last N iterations only
+  flows:
+    - id: example-flow
+      entry: /                             # URL path to open
+      goal: Describe what a user should be able to accomplish
+      checkpoints:
+        - page renders without errors
+        - primary action works
+        - result visible to user
+    # Add more flows here...
+    # - id: another-flow
+    #   entry: /another-page
+    #   goal: ...
+    #   checkpoints: [...]
+
+# ─── Verification Contract ──────────────────────────────────────
+# This is what makes KitchenLoop a framework, not a cron job.
+verification:
+  oracle:
+    type: "deterministic"                  # deterministic | statistical | hybrid
+    full_command: "make test"              # Full regression suite (L1+L2)
+    quick_command: "make test-smoke"       # Quick unit tests (every iteration)
+    smoke_command: ""                      # L3 integration smoke test: starts real app, hits real
+                                           # endpoints, verifies real state. This is the "unbeatable"
+                                           # gate — it catches "38 passing unit tests, broken service".
+                                           # Examples:
+                                           #   Web app:  "npm run test:smoke"  (starts server, curls endpoints)
+                                           #   CLI:      "bash tests/smoke.sh" (runs real CLI, checks output)
+                                           #   API:      "pytest tests/smoke/" (hits real API, checks responses)
+                                           # Leave empty if not yet bootstrapped — the loop will
+                                           # prioritize creating one in its first iteration.
+    lint_command: "make lint"              # Linting command
+    security_command: ""                   # Security scan (e.g. "bandit -r src" or "npm audit")
+                                           # Leave empty to skip. Runs during regress phase.
+    canary_check_command: ""               # Optional canary check (advisory — warns, does not halt).
+                                           # Must be path to an executable. Iteration number is
+                                           # appended as the last argument.
+                                           # Example: "python scripts/check_canaries.py"
+                                           # Leave empty to skip.
+    build_command: ""                      # Build preflight (e.g. "npm run build" or "make build")
+                                           # Runs before each iteration. Leave empty to skip.
+
+  preflight_commands: []                   # Shell commands that must pass before each iteration.
+    # Each command runs in the worktree; non-zero exit blocks the iteration.
+    # Use this for health checks, deployment freshness, or any environment
+    # validation specific to your project. Examples:
+    # - "curl -sf http://localhost:3000/health"
+    # - "test $(git rev-list --count origin/main..deployed) -le 1"
+
+  preflight_env_vars: []                   # Env vars that must be set before running
+    # - "DATABASE_URL"
+    # - "API_KEY"
+
+  stop_conditions:
+    pass_rate_floor: 0.95                  # Pause if pass rate drops below this
+    max_consecutive_failures: 3            # Pause after N consecutive regress failures
+    test_count_decline_iters: 3            # Flag if test count declines for N iterations
+
+  skip_policy:
+    ideate_fail: "continue"                # continue | pause | retry
+    execute_fail: "continue"
+    regress_fail: "pause"                  # Regress failure should stop the loop
+
+  merge_gates:
+    - "ci_pass"                            # All CI checks green
+    # - "review_approval"                  # At least one review approval
+    # - "oracle_pass"                      # Last regression oracle passed
+
+# ─── Ticketing ──────────────────────────────────────────────────
+ticketing:
+  provider: "github"                       # github | none (linear: planned)
+  github:
+    labels:
+      bug: "bug"
+      feature: "enhancement"
+      improvement: "improvement"
+      exploration: "exploration"
+    state_labels:
+      todo: "kitchenloop:todo"
+      in_progress: "kitchenloop:in-progress"
+      in_review: "kitchenloop:in-review"
+      done: "kitchenloop:done"
+  # linear:                                 # Coming soon — Linear API integration
+  #   team: "MyTeam"
+  #   project: "My Project"
+
+# ─── Quality Bar ─────────────────────────────────────────────────
+quality:
+  bar_file: ".kitchenloop/quality-bar.md"
+
+# ─── PR Manager ─────────────────────────────────────────────────
+pr_manager:
+  author_allowlist: []                     # Empty = trust all PR authors
+  review_bot: "coderabbitai"               # Bot name to check for review threads
+  require_ci: true
+  skip_after_failures: 1                   # Label needs-attention after N failures
+
+# ─── External Reviewers ─────────────────────────────────────────
+# When multiple reviewers are enabled, the PR Manager uses consensus
+# classification: all-agree = CONFIRMED, majority = LIKELY, solo = FLAG.
+reviewers:
+  codex:
+    enabled: true
+    timeout: 30
+  gemini:
+    enabled: false                         # Enable for multi-model tribunal
+    timeout: 60
+
+# ─── Runtime ─────────────────────────────────────────────────────
+runtime:
+  timeouts:
+    ideate: 2700                           # 45 min
+    triage: 1200                           # 20 min
+    execute: 3600                          # 1 hour
+    polish: 5400                           # 90 min
+    regress: 9000                          # 2.5 hours
+    backlog: 900                           # 15 min
+  backlog_interval: 3                      # Groom backlog every N loops
+  review_interval: 3                       # Auto-review every N iterations
+  polish_max_prs: 2                        # Max PRs to process per iteration
+  drain_threshold: 10                      # Switch to dev-only when backlog > N
+  drain_exit_threshold: 5                  # Exit drain mode when backlog < N
+  max_no_work_loops: 3                     # Hard-stop after N consecutive loops with no work
+  max_drain_entries: 3                     # Hard-stop after N drain-mode entries with no work
+  force_ideate_interval: 10               # Force ideate every N loops even when stale
+  ticket_drought_threshold: 5             # Override circuit breaker after N zero-ticket iterations
+  starve_backlog_threshold: 3             # Fall back to backlog after N starved execute phases
+  starve_skip_execute_threshold: 6        # Skip execute entirely after N starved iterations
+  state_dir: ".kitchenloop/state"          # Directory for persistent loop state
+
+# ─── Modes ───────────────────────────────────────────────────────
+modes:
+  default:
+    ideate_prompt: "prompts/ideate.md"
+  backtest:
+    ideate_prompt: "prompts/ideate-backtest.md"
+    description: "Exercise your testing pipeline"
+  exploration:
+    ideate_prompt: "prompts/ideate-exploration.md"
+    description: "Explore coverage gaps"
+  ui:
+    ideate_prompt: "prompts/ideate-ui.md"
+    description: "UI-driven loop: one browser flow per iteration, finds bugs early"

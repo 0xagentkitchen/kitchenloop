@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use or reference the Kitchen Loop framework, please cite it as below."
+title: "The Kitchen Loop: User-Spec-Driven Development for a Self-Evolving Codebase"
+authors:
+  - family-names: "Roy"
+    given-names: "Yannick"
+type: software
+date-released: "2026-03-18"
+version: "5.2"
+url: "https://github.com/0xagentkitchen/kitchenloop"
+repository-code: "https://github.com/0xagentkitchen/kitchenloop"
+keywords:
+  - agentic software engineering
+  - autonomous coding
+  - specification-driven development
+  - regression oracle
+  - coverage exhaustion
+  - self-evolving codebase
+license: MIT

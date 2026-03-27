@@ -1,0 +1,6 @@
+# ShellCheck configuration for KitchenLoop
+#
+# SC1090: Can't follow non-constant source — expected with dynamic config loading
+# SC1091: Not following sourced file — same reason
+# SC2155: Declare and assign separately — valid but noisy for config-heavy scripts
+disable=SC1090,SC1091,SC2155,SC2034

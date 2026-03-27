@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# KitchenLoop runtime
+.kitchenloop/
+
+# Environment
+.env
+.env.local
+
+# Node
+node_modules/
+
+# Video build output
+video/out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

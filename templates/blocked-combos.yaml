@@ -1,0 +1,15 @@
+# Blocked Combos Registry — {{PROJECT_NAME}}
+#
+# Machine-readable registry of known-broken feature/dimension combinations.
+# The ideation phase reads this to skip known-broken paths.
+# When a blocking ticket is resolved, remove the entry so the combo
+# becomes available for ideation again.
+#
+# Format:
+#   blocked_combos:
+#     - combo: { feature: "auth", platform: "mobile" }
+#       reason: "Mobile auth not yet implemented"
+#       since_iteration: 3
+#       ticket: "#42"
+
+blocked_combos: []
