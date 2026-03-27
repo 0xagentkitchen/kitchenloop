@@ -33,7 +33,7 @@ An autonomous AI coding framework where an LLM agent uses your product as a synt
 **UAT Gate** — After every implementation, a *fresh agent* (zero context, weakest model, read-only, isolated worktree) verifies the feature works from a user's perspective. Sealed test card. No cheating.
 
 <p align="center">
-  <img src="paper/trust-model.png" alt="The Kitchen Loop — Unified Trust Model" width="650">
+  <img src="img/trust-model.png" alt="The Kitchen Loop — Unified Trust Model" width="650">
 </p>
 
 ## The Six-Phase Loop
@@ -50,7 +50,7 @@ Every iteration runs all six phases. Every phase has a job. Nothing ships withou
 | **Regression** | Run the regression oracle. Measure drift. Update loop state. |
 
 <p align="center">
-  <img src="paper/six-phase-loop.png" alt="Six-Phase Loop" width="650">
+  <img src="img/six-phase-loop.png" alt="Six-Phase Loop" width="650">
 </p>
 
 ---
@@ -170,7 +170,7 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 
 | | |
 |---|---|
-| [Whitepaper](paper/whitepaper.pdf) | Framework design, method, and production evidence |
+| [Whitepaper](https://arxiv.org/abs/2603.25697) | Framework design, method, and production evidence |
 | [How-To Guide](docs/howto.md) | Operator manual for running and monitoring |
 | [Examples](examples/) | Demo repos: [Pantry](https://github.com/0xagentkitchen/pantry-demo) (Python CLI), [Mise](https://github.com/0xagentkitchen/mise) (FastAPI + JS) |
 
@@ -184,7 +184,7 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 
 ## Next Steps
 
-1. **Ask your AI agent.** *"Hey Claude, how can I use the KitchenLoop in my project? Read the [paper](paper/whitepaper.pdf) and the [repo](https://github.com/0xagentkitchen/kitchenloop)."*
+1. **Ask your AI agent.** *"Hey Claude, how can I use the KitchenLoop in my project? Read the [paper](https://arxiv.org/abs/2603.25697) and the [repo](https://github.com/0xagentkitchen/kitchenloop)."*
 2. **Install it.** Follow the [Quickstart](#quickstart) above to initialize on your own codebase.
 3. **Try the demo.** Clone the [Pantry Demo](https://github.com/0xagentkitchen/pantry-demo), launch the KitchenLoop, and watch the app evolve automagically.
 
