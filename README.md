@@ -172,7 +172,7 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 |---|---|
 | [Whitepaper](https://arxiv.org/abs/2603.25697) | Framework design, method, and production evidence |
 | [How-To Guide](docs/howto.md) | Operator manual for running and monitoring |
-| [Examples](examples/) | Demo repos: [Pantry](https://github.com/0xagentkitchen/pantry-demo) (Python CLI), [Mise](https://github.com/0xagentkitchen/mise) (FastAPI + JS) |
+| [Examples](examples/) | Demo repos: [Pantry](https://github.com/0xagentkitchen/pantry-demo) (Python CLI), [Mise](https://github.com/0xagentkitchen/mise-demo) (FastAPI + JS) |
 
 ### Mise Demo — Hands-Free, Self-Evolving
 
@@ -186,7 +186,7 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 
 1. **Ask your AI agent.** *"Hey Claude, how can I use the KitchenLoop in my project? Read the [paper](https://arxiv.org/abs/2603.25697) and the [repo](https://github.com/0xagentkitchen/kitchenloop)."*
 2. **Install it.** Follow the [Quickstart](#quickstart) above to initialize on your own codebase.
-3. **Try the demo.** Clone the [Pantry Demo](https://github.com/0xagentkitchen/pantry-demo), launch the KitchenLoop, and watch the app evolve automagically.
+3. **Try a demo.** Clone [Mise](https://github.com/0xagentkitchen/mise-demo) (web app) or [Pantry](https://github.com/0xagentkitchen/pantry-demo) (CLI), install KitchenLoop, and watch the app evolve automagically.
 
 ---
 
