@@ -188,6 +188,10 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 2. **Install it.** Follow the [Quickstart](#quickstart) above to initialize on your own codebase.
 3. **Try a demo.** Clone [Mise](https://github.com/0xagentkitchen/mise-demo) (web app) or [Pantry](https://github.com/0xagentkitchen/pantry-demo) (CLI), install KitchenLoop, and watch the app evolve automagically.
 
+<p align="center">
+  <img src="img/ClaudeHowToUse.png" alt="Claude Code How To" width="650">
+</p>
+
 ---
 
 ## Contributing
