@@ -2,7 +2,7 @@
 
 ### User-Spec-Driven Development for a Self-Evolving Codebase
 
-*By Yannick Roy — [arXiv Paper](https://arxiv.org/abs/2603.25697) | [How-To Guide](docs/howto.md)*
+*By Yannick Roy — [arXiv Paper](https://arxiv.org/abs/2603.25697) ([HTML](https://arxiv.org/html/2603.25697v1)) | [How-To Guide](docs/howto.md)*
 
 <a href="https://youtu.be/dcFWapTGMT8">
   <img src="video/kitchenloop.gif" alt="KitchenLoop — Marketing Video" width="100%">
@@ -82,7 +82,7 @@ cd /path/to/your/project
 | `git`, `gh` | Version control + GitHub CLI |
 | `jq`, `yq` | JSON/YAML processing |
 
-Optional (for the [Discussion Manager](whitepaper.pdf)):
+Optional (for the [Discussion Manager](https://arxiv.org/abs/2603.25697)):
 [`gemini`](https://github.com/google-gemini/gemini-cli),
 [`codex`](https://github.com/openai/codex) — multi-AI debate with anti-sycophancy safeguards.
 
@@ -147,7 +147,7 @@ your-project/
 | Production System A | Multi-chain strategy framework (14 chains, 30+ connectors) | 122+ | 921+ | Zero regressions, quality gates 76% → 100% |
 | Production System B | Signal intelligence platform (46+ detection agents) | 163+ | 173+ | Zero regressions, zero Tier-1 canary escapes |
 
-*Details in the [whitepaper](https://arxiv.org/abs/2603.25697).*
+*Details in the [paper](https://arxiv.org/abs/2603.25697) ([HTML](https://arxiv.org/html/2603.25697v1)).*
 
 ---
 
@@ -170,7 +170,7 @@ python scripts/ai-discussion/discuss.py "Should we use SQLite or PostgreSQL?" --
 
 | | |
 |---|---|
-| [Whitepaper](https://arxiv.org/abs/2603.25697) | Framework design, method, and production evidence |
+| [Paper](https://arxiv.org/abs/2603.25697) ([HTML](https://arxiv.org/html/2603.25697v1)) | Framework design, method, and production evidence |
 | [How-To Guide](docs/howto.md) | Operator manual for running and monitoring |
 | [Examples](examples/) | Demo repos: [Pantry](https://github.com/0xagentkitchen/pantry-demo) (Python CLI), [Mise](https://github.com/0xagentkitchen/mise-demo) (FastAPI + JS) |
 
